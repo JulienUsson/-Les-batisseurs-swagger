@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: Les Bâtisseurs - Moyen-Âge
+  version: '1.0'
+  description: API pour le jeu de société Les Bâtisseurs - Moyen-Âge Backend
+  contact:
+    name: Julien Usson
+    email: julien@usson.me
+    url: 'https://cours.usson.me'
+servers:
+  - url: 'http://localhost:3000'
+    description: Local
+paths:
+  /games:
+    post:
+      summary: Create a game
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/game.v1.yaml
+      description: Create and initialise a game
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/gameinput.v1.yaml
+            examples:
+              Default:
+                value:
+                  name: test
+                  numberOfPlayers: 4
+              No sorts:
+                value:
+                  name: test
+                  numberOfPlayers: 4
+                  shuffle: false
+      tags:
+        - Game
+      operationId: createGame
+    parameters: []
+    get:
+      summary: Get all games
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/gameinfo.v1.yaml
+      description: Get all games
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: Name filter
+        - schema:
+            type: string
+          in: query
+          name: done
+          description: Done filter
+        - schema:
+            type: string
+          in: query
+          name: id
+          description: Id filter
+      tags:
+        - Game
+      operationId: findAllGames
+  '/games/{gameId}':
+    get:
+      summary: Get a game
+      description: Get a game by its id.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/game.v1.yaml
+        '404':
+          description: Game not found.
+      operationId: getGame
+      tags:
+        - Game
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+  '/games/{gameId}/actions':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    post:
+      summary: Play an action
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/game.v1.yaml
+        '400':
+          description: "Can't execute this action."
+        '401':
+          description: "It's not the player turn."
+      description: Play an action in the game
+      parameters:
+        - schema:
+            type: number
+          in: header
+          name: player-id
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/action.v1.yaml
+            examples:
+              End turn:
+                value:
+                  type: END_TURN
+              Take building:
+                value:
+                  type: TAKE_BUILDING
+                  buildingId: 101
+              Take worker:
+                value:
+                  type: TAKE_WORKER
+                  workerId: 202
+              Take money:
+                value:
+                  type: TAKE_MONEY
+                  numberOfActions: 1
+              Send worker:
+                value:
+                  type: SEND_WORKER
+                  buildingId: 101
+                  workerId: 202
+              Buy action:
+                value:
+                  type: BUY_ACTION
+                  numberOfActions: 1
+      operationId: playAction
+      tags:
+        - Game
+  /health:
+    get:
+      summary: Get application status
+      tags:
+        - Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/healthstatus.v1.yaml
+              examples:
+                app is ok:
+                  value:
+                    health: ok
+      description: Get application status
+      operationId: getHealth
+  /cards/workers:
+    get:
+      summary: Get all workers cards
+      tags:
+        - Cards
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/worker.v1.yaml
+      description: Get all workers cards
+      operationId: findAllWorkers
+  /cards/buildings:
+    get:
+      summary: Get all buildings cards
+      tags:
+        - Cards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/building.v1.yaml
+      description: Get all buildings cards
+      operationId: findAllBuildings
+components:
+  schemas: {}
