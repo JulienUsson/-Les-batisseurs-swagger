@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Les Bâtisseurs - Moyen-Âge Swagger",
   "scripts": {
-    "build": "openapi-generator generate -i ./reference/les-batisseurs-moyen-age/openapi.yaml -g html2 -o ./build"
+    "build": "openapi-generator generate -i ./reference/les-batisseurs-moyen-age/openapi.yaml -g html2 -o ./build && openapi-generator generate -i ./reference/les-batisseurs-moyen-age/openapi.yaml -g openapi-yaml -o ./build"
   },
   "author": "Julien Usson",
   "license": "MIT",
