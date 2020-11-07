@@ -12,14 +12,23 @@ x-examples:
 properties:
   id:
     type: string
+    description: Identifiant unique.
+    example: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
   name:
     type: string
+    description: Nom de la partie.
+    example: Partie du samedi soir
   numberOfPlayers:
     type: number
+    description: Nombre de joueurs
+    example: 4
   done:
     type: boolean
+    description: Est-ce que la partie est terminée ?
   createdDate:
     type: string
+    description: Date de création de la partie
+    example: '1604745669 '
 required:
   - id
   - name

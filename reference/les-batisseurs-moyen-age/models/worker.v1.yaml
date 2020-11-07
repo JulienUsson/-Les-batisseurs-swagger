@@ -17,17 +17,31 @@ x-examples:
       tile: '0'
 properties:
   id:
-    type: number
+    type: string
+    description: Identifiant unique.
+    example: '10'
   price:
     type: number
+    description: |-
+      Nombre d’Écus que le joueur doit payer pour Envoyer
+      travailler cet Ouvrier.
+    example: 5
   stone:
     type: number
+    description: Nombre de Ressources «pierre» que produit cet Ouvrier.
+    example: 2
   wood:
     type: number
+    description: Nombre de Ressources «bois» que produit cet Ouvrier.
+    example: 3
   knowledge:
     type: number
+    description: Nombre de Ressources «savoir» que produit cet Ouvrier.
+    example: 4
   tile:
     type: number
+    description: Nombre de Ressources «tuile» que produit cet Ouvrier.
+    example: 5
 required:
   - id
   - price

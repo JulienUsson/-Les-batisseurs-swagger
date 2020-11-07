@@ -848,7 +848,8 @@ ul.nav-tabs {
   "properties" : {
     "type" : {
       "type" : "string",
-      "description" : "Type of the action",
+      "description" : "Type d'action",
+      "example" : "TAKE_BUILDING",
       "enum" : [ "TAKE_BUILDING", "TAKE_WORKER", "TAKE_MONEY", "SEND_WORKER", "BUY_ACTION", "END_TURN" ]
     },
     "payload" : {
@@ -898,18 +899,18 @@ ul.nav-tabs {
   "properties" : {
     "buildingId" : {
       "type" : "string",
-      "description" : "Building id for TAKE_BUILDING or SEND_WORKER actions."
+      "description" : "Identifiant du bâtiment pour les actions TAKE_BUILDING et SEND_WORKER."
     },
     "workerId" : {
       "type" : "string",
-      "description" : "Worker id for TAKE_WORKER or SEND_WORKER actions"
+      "description" : "Identifiant de l'ouvrier pour les actions TAKE_WORKER et SEND_WORKER."
     },
     "numberOfActions" : {
       "type" : "number",
-      "description" : "Numbers of action for the TAKE_MONEY action"
+      "description" : "Nombre d'actions échangées pour l'action TAKE_MONEY."
     }
   },
-  "description" : "Parameters of the action"
+  "description" : "Paramètres nécessaires pour effectuer l'action."
 };
     defs["building"] = {
   "title" : "Building",
@@ -917,41 +918,59 @@ ul.nav-tabs {
   "type" : "object",
   "properties" : {
     "id" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Identifiant du bâtiment.",
+      "example" : 5
     },
     "reward" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre d’Écus que le joueur gagnera, une fois\nle Bâtiment terminé.",
+      "example" : 12
     },
     "victoryPoint" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de points de victoire que le joueur gagnera,\nune fois le Bâtiment terminé.",
+      "example" : 3
     },
     "stone" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «pierre» nécessaires à la\nconstruction du Bâtiment.",
+      "example" : 2
     },
     "wood" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «bois» nécessaires à la\nconstruction du Bâtiment.",
+      "example" : 1
     },
     "knowledge" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «savoir» nécessaires à la\nconstruction du Bâtiment.",
+      "example" : 1
     },
     "tile" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «tuile» nécessaires à la\nconstruction du Bâtiment.",
+      "example" : 2
     },
     "stoneProduced" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «pierre» produite par la machine."
     },
     "woodProduced" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «bois» produite par la machine."
     },
     "knowledgeProduced" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «savoir» produite par la machine."
     },
     "tileProduced" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «tuile» produite par la machine."
     },
     "workers" : {
       "type" : "array",
-      "description" : "Workers working on the building",
+      "description" : "Ouvriers travaillant sur le bâtiment. Utile uniquement lors d'une partie.",
       "items" : {
         "$ref" : "#/components/schemas/worker"
       }
@@ -984,44 +1003,45 @@ ul.nav-tabs {
 };
     defs["game"] = {
   "title" : "Game",
-  "required" : [ "buildings", "createDate", "currentPlayer", "done", "id", "moneyAvailable", "name", "nextBuilding", "nextWorker", "players", "remainingBuildings", "remainingWorkers", "workers" ],
+  "required" : [ "buildings", "createdDate", "currentPlayer", "done", "id", "moneyAvailable", "name", "nextBuilding", "nextWorker", "players", "remainingBuildings", "remainingWorkers", "workers" ],
   "type" : "object",
   "properties" : {
     "id" : {
       "type" : "string",
-      "description" : "Id of the game"
+      "description" : "Identifiant unique.",
+      "example" : "2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2"
     },
     "currentPlayer" : {
       "maximum" : 4,
       "minimum" : 1,
       "type" : "number",
-      "description" : "Current player id"
+      "description" : "Identifiant du joueur actuel."
     },
     "moneyAvailable" : {
       "type" : "number",
-      "description" : "Money available in the game"
+      "description" : "Le nombre d'écus disponible au centre de la table."
     },
     "workers" : {
       "type" : "array",
-      "description" : "worker cards available",
+      "description" : "Les cartes ouvriers face visible sur le terrain.",
       "items" : {
         "$ref" : "#/components/schemas/worker"
       }
     },
     "buildings" : {
       "type" : "array",
-      "description" : "Building cards available",
+      "description" : "Les cartes bâtiments face visible sur le terrain.",
       "items" : {
         "$ref" : "#/components/schemas/building"
       }
     },
     "remainingWorkers" : {
       "type" : "number",
-      "description" : "Number of card in the workers deck"
+      "description" : "Nombre de cartes restantes dans la pioche ouvrier."
     },
     "remainingBuildings" : {
       "type" : "number",
-      "description" : "Number of card in the buildings deck"
+      "description" : "Nombre de cartes restantes dans la pioche bâtiment."
     },
     "nextWorker" : {
       "$ref" : "#/components/schemas/worker"
@@ -1031,16 +1051,19 @@ ul.nav-tabs {
     },
     "done" : {
       "type" : "boolean",
-      "description" : "Is game done"
+      "description" : "Est-ce que la partie est terminée ?"
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "Nom de la partie."
     },
-    "createDate" : {
-      "type" : "string"
+    "createdDate" : {
+      "type" : "string",
+      "description" : "Date de création de la partie."
     },
     "players" : {
       "type" : "array",
+      "description" : "Les joueurs.",
       "items" : {
         "$ref" : "#/components/schemas/player"
       }
@@ -1231,19 +1254,28 @@ ul.nav-tabs {
   "type" : "object",
   "properties" : {
     "id" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "Identifiant unique.",
+      "example" : "2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2"
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "Nom de la partie.",
+      "example" : "Partie du samedi soir"
     },
     "numberOfPlayers" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de joueurs",
+      "example" : 4
     },
     "done" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "description" : "Est-ce que la partie est terminée ?"
     },
     "createdDate" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "Date de création de la partie",
+      "example" : "1604745669 "
     }
   },
   "description" : "Game",
@@ -1268,15 +1300,18 @@ ul.nav-tabs {
       "maximum" : 4,
       "minimum" : 2,
       "type" : "number",
-      "description" : "Number of players in the game"
+      "description" : "Nombre de joueurs.",
+      "example" : 4
     },
     "shuffle" : {
       "type" : "boolean",
-      "description" : "Will the deck be shuffle",
+      "description" : "Mélanger le deck. Permet de simplifier les tests.",
       "default" : true
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "Nom de la partie.",
+      "example" : "Partie du samedi soir"
     }
   },
   "x-examples" : {
@@ -1315,39 +1350,44 @@ ul.nav-tabs {
       "maximum" : 4,
       "minimum" : 1,
       "type" : "number",
-      "description" : "Id of the player between 1 and 4."
+      "description" : "Identifiant compris entre 1 et 4 selon le nombre de joueurs.",
+      "example" : 1
     },
     "finishedBuildings" : {
       "type" : "array",
-      "description" : "Buildings finished",
+      "description" : "Bâtiments terminés.",
       "items" : {
         "$ref" : "#/components/schemas/building"
       }
     },
     "availableWorkers" : {
       "type" : "array",
-      "description" : "Available workers",
+      "description" : "Ouvriers disponible pour travailler.",
       "items" : {
         "$ref" : "#/components/schemas/worker"
       }
     },
     "underConstructionBuildings" : {
       "type" : "array",
-      "description" : "Under construction buildings",
+      "description" : "Bâtiments en cours de construction.",
       "items" : {
         "$ref" : "#/components/schemas/building"
       }
     },
     "money" : {
       "type" : "number",
-      "description" : "Money of the player"
+      "description" : "Les écus qui possèdent le joueur.",
+      "example" : 10
     },
     "victoryPoints" : {
       "type" : "number",
-      "description" : "Number of victory point the player has. Without the money part until the end of the game."
+      "description" : "Les points de victoire du joueur sans les points de victoire liés aux écus.",
+      "example" : 0
     },
     "actions" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Le nombre d'actions dont dispose un joueur lors de son tour.",
+      "example" : 3
     }
   },
   "x-examples" : {
@@ -1377,22 +1417,34 @@ ul.nav-tabs {
   "type" : "object",
   "properties" : {
     "id" : {
-      "type" : "number"
+      "type" : "string",
+      "description" : "Identifiant unique.",
+      "example" : "10"
     },
     "price" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre d’Écus que le joueur doit payer pour Envoyer\ntravailler cet Ouvrier.",
+      "example" : 5
     },
     "stone" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «pierre» que produit cet Ouvrier.",
+      "example" : 2
     },
     "wood" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «bois» que produit cet Ouvrier.",
+      "example" : 3
     },
     "knowledge" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «savoir» que produit cet Ouvrier.",
+      "example" : 4
     },
     "tile" : {
-      "type" : "number"
+      "type" : "number",
+      "description" : "Nombre de Ressources «tuile» que produit cet Ouvrier.",
+      "example" : 5
     }
   },
   "x-examples" : {
@@ -1488,7 +1540,7 @@ ul.nav-tabs {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get all buildings cards</p>
+                        <p class="marked">Récupérer toutes les cartes bâtiments.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/cards/buildings</span></code></pre>
@@ -1785,7 +1837,7 @@ pub fn main() {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get all workers cards</p>
+                        <p class="marked">Récupérer toutes les cartes ouvriers.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/cards/workers</span></code></pre>
@@ -2085,7 +2137,7 @@ pub fn main() {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Create and initialise a game</p>
+                        <p class="marked">Créer et initialiser une partie.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/games</span></code></pre>
@@ -2450,7 +2502,7 @@ $(document).ready(function() {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get all games</p>
+                        <p class="marked">Lister toutes les parties.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/games</span></code></pre>
@@ -2474,7 +2526,7 @@ $(document).ready(function() {
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Game-findAllGames-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "http://localhost:3000/games?name=&done=&id="</code></pre>
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "http://localhost:3000/games"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Game-findAllGames-0-java">
                             <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
@@ -2490,11 +2542,8 @@ public class GameApiExample {
     public static void main(String[] args) {
         
         GameApi apiInstance = new GameApi();
-        String name = name_example; // String | Name filter
-        String done = done_example; // String | Done filter
-        String id = id_example; // String | Id filter
         try {
-            array[gameinfo] result = apiInstance.findAllGames(name, done, id);
+            array[gameinfo] result = apiInstance.findAllGames();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GameApi#findAllGames");
@@ -2512,11 +2561,8 @@ public class GameApiExample {
 
     public static void main(String[] args) {
         GameApi apiInstance = new GameApi();
-        String name = name_example; // String | Name filter
-        String done = done_example; // String | Done filter
-        String id = id_example; // String | Id filter
         try {
-            array[gameinfo] result = apiInstance.findAllGames(name, done, id);
+            array[gameinfo] result = apiInstance.findAllGames();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling GameApi#findAllGames");
@@ -2530,17 +2576,12 @@ public class GameApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Game-findAllGames-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">String *name = name_example; // Name filter (optional) (default to null)
-String *done = done_example; // Done filter (optional) (default to null)
-String *id = id_example; // Id filter (optional) (default to null)
-
+                              <pre class="prettyprint"><code class="language-cpp">
 GameApi *apiInstance = [[GameApi alloc] init];
 
 // Get all games
-[apiInstance findAllGamesWith:name
-    done:done
-    id:id
-              completionHandler: ^(array[gameinfo] output, NSError* error) {
+[apiInstance findAllGamesWithCompletionHandler: 
+              ^(array[gameinfo] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2555,12 +2596,6 @@ GameApi *apiInstance = [[GameApi alloc] init];
                               <pre class="prettyprint"><code class="language-js">var LesBtisseursMoyenGe = require('les_btisseurs_moyen_ge');
 
 var api = new LesBtisseursMoyenGe.GameApi()
-var opts = {
-  'name': name_example, // {String} Name filter
-  'done': done_example, // {String} Done filter
-  'id': id_example // {String} Id filter
-};
-
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -2568,7 +2603,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.findAllGames(opts, callback);
+api.findAllGames(callback);
 </code></pre>
                             </div>
 
@@ -2590,14 +2625,11 @@ namespace Example
         {
             
             var apiInstance = new GameApi();
-            var name = name_example;  // String | Name filter (optional)  (default to null)
-            var done = done_example;  // String | Done filter (optional)  (default to null)
-            var id = id_example;  // String | Id filter (optional)  (default to null)
 
             try
             {
                 // Get all games
-                array[gameinfo] result = apiInstance.findAllGames(name, done, id);
+                array[gameinfo] result = apiInstance.findAllGames();
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2615,12 +2647,9 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new OpenAPITools\Client\Api\GameApi();
-$name = name_example; // String | Name filter
-$done = done_example; // String | Done filter
-$id = id_example; // String | Id filter
 
 try {
-    $result = $api_instance->findAllGames($name, $done, $id);
+    $result = $api_instance->findAllGames();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GameApi->findAllGames: ', $e->getMessage(), PHP_EOL;
@@ -2634,12 +2663,9 @@ use WWW::OPenAPIClient::Configuration;
 use WWW::OPenAPIClient::GameApi;
 
 my $api_instance = WWW::OPenAPIClient::GameApi->new();
-my $name = name_example; # String | Name filter
-my $done = done_example; # String | Done filter
-my $id = id_example; # String | Id filter
 
 eval { 
-    my $result = $api_instance->findAllGames(name => $name, done => $done, id => $id);
+    my $result = $api_instance->findAllGames();
     print Dumper($result);
 };
 if ($@) {
@@ -2656,13 +2682,10 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = openapi_client.GameApi()
-name = name_example # String | Name filter (optional) (default to null)
-done = done_example # String | Done filter (optional) (default to null)
-id = id_example # String | Id filter (optional) (default to null)
 
 try: 
     # Get all games
-    api_response = api_instance.find_all_games(name=name, done=done, id=id)
+    api_response = api_instance.find_all_games()
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling GameApi->findAllGames: %s\n" % e)</code></pre>
@@ -2672,12 +2695,9 @@ except ApiException as e:
                               <pre class="prettyprint"><code class="language-rust">extern crate GameApi;
 
 pub fn main() {
-    let name = name_example; // String
-    let done = done_example; // String
-    let id = id_example; // String
 
     let mut context = GameApi::Context::default();
-    let result = client.findAllGames(name, done, id, &context).wait();
+    let result = client.findAllGames(&context).wait();
     println!("{:?}", result);
 
 }
@@ -2696,73 +2716,6 @@ pub fn main() {
 
 
 
-                            <div class="methodsubtabletitle">Query parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">name</td>
-<td>
-
-
-    <div id="d2e199_findAllGames_name">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Name filter
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">done</td>
-<td>
-
-
-    <div id="d2e199_findAllGames_done">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Done filter
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                                <tr><td style="width:150px;">id</td>
-<td>
-
-
-    <div id="d2e199_findAllGames_id">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Id filter
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                            </table>
 
                           <h2>Responses</h2>
                             <h3 id="examples-Game-findAllGames-title-200"></h3>
@@ -2846,7 +2799,7 @@ Id filter
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get a game by its id.</p>
+                        <p class="marked">Récupérer une partie via un identifiant.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/games/{gameId}</span></code></pre>
@@ -3199,7 +3152,7 @@ pub fn main() {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Play an action in the game</p>
+                        <p class="marked">Jouer une action.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/games/{gameId}/actions</span></code></pre>
@@ -3240,7 +3193,7 @@ public class GameApiExample {
         
         GameApi apiInstance = new GameApi();
         String gameId = gameId_example; // String | 
-        BigDecimal playerId = 8.14; // BigDecimal | 
+        BigDecimal playerId = 1; // BigDecimal | Identifiant du joueur qui veut effectuer l'action.
         Action action = {"type":"END_TURN"}; // Action | 
         try {
             game result = apiInstance.playAction(gameId, playerId, action);
@@ -3262,7 +3215,7 @@ public class GameApiExample {
     public static void main(String[] args) {
         GameApi apiInstance = new GameApi();
         String gameId = gameId_example; // String | 
-        BigDecimal playerId = 8.14; // BigDecimal | 
+        BigDecimal playerId = 1; // BigDecimal | Identifiant du joueur qui veut effectuer l'action.
         Action action = {"type":"END_TURN"}; // Action | 
         try {
             game result = apiInstance.playAction(gameId, playerId, action);
@@ -3280,7 +3233,7 @@ public class GameApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Game-playAction-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">String *gameId = gameId_example; //  (default to null)
-BigDecimal *playerId = 8.14; //  (default to null)
+BigDecimal *playerId = 1; // Identifiant du joueur qui veut effectuer l'action. (default to null)
 Action *action = {"type":"END_TURN"}; //  (optional)
 
 GameApi *apiInstance = [[GameApi alloc] init];
@@ -3305,7 +3258,7 @@ GameApi *apiInstance = [[GameApi alloc] init];
 
 var api = new LesBtisseursMoyenGe.GameApi()
 var gameId = gameId_example; // {String} 
-var playerId = 8.14; // {BigDecimal} 
+var playerId = 1; // {BigDecimal} Identifiant du joueur qui veut effectuer l'action.
 var opts = {
   'action': {"type":"END_TURN"} // {Action} 
 };
@@ -3340,7 +3293,7 @@ namespace Example
             
             var apiInstance = new GameApi();
             var gameId = gameId_example;  // String |  (default to null)
-            var playerId = 8.14;  // BigDecimal |  (default to null)
+            var playerId = 1;  // BigDecimal | Identifiant du joueur qui veut effectuer l'action. (default to null)
             var action = new Action(); // Action |  (optional) 
 
             try
@@ -3365,7 +3318,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new OpenAPITools\Client\Api\GameApi();
 $gameId = gameId_example; // String | 
-$playerId = 8.14; // BigDecimal | 
+$playerId = 1; // BigDecimal | Identifiant du joueur qui veut effectuer l'action.
 $action = {"type":"END_TURN"}; // Action | 
 
 try {
@@ -3384,7 +3337,7 @@ use WWW::OPenAPIClient::GameApi;
 
 my $api_instance = WWW::OPenAPIClient::GameApi->new();
 my $gameId = gameId_example; # String | 
-my $playerId = 8.14; # BigDecimal | 
+my $playerId = 1; # BigDecimal | Identifiant du joueur qui veut effectuer l'action.
 my $action = WWW::OPenAPIClient::Object::Action->new(); # Action | 
 
 eval { 
@@ -3406,7 +3359,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = openapi_client.GameApi()
 gameId = gameId_example # String |  (default to null)
-playerId = 8.14 # BigDecimal |  (default to null)
+playerId = 1 # BigDecimal | Identifiant du joueur qui veut effectuer l'action. (default to null)
 action = {"type":"END_TURN"} # Action |  (optional)
 
 try: 
@@ -3422,7 +3375,7 @@ except ApiException as e:
 
 pub fn main() {
     let gameId = gameId_example; // String
-    let playerId = 8.14; // BigDecimal
+    let playerId = 1; // BigDecimal
     let action = {"type":"END_TURN"}; // Action
 
     let mut context = GameApi::Context::default();
@@ -3486,6 +3439,9 @@ pub fn main() {
                     BigDecimal
                 </span>
 
+                    <div class="inner description marked">
+Identifiant du joueur qui veut effectuer l&#39;action.
+                    </div>
             </div>
                 <div class="inner required">
                     Required
@@ -3708,7 +3664,7 @@ $(document).ready(function() {
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
                         <p></p>
-                        <p class="marked">Get application status</p>
+                        <p class="marked">Récupérer le status de l&#39;application.</p>
                         <p></p>
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/health</span></code></pre>

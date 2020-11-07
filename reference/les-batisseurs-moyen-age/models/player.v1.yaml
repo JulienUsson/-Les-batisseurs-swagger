@@ -19,32 +19,37 @@ x-examples:
 properties:
   id:
     type: number
-    description: Id of the player between 1 and 4.
+    description: Identifiant compris entre 1 et 4 selon le nombre de joueurs.
     minimum: 1
     maximum: 4
+    example: 1
   finishedBuildings:
     type: array
-    description: Buildings finished
+    description: Bâtiments terminés.
     items:
       $ref: ./building.v1.yaml
   availableWorkers:
     type: array
-    description: Available workers
+    description: Ouvriers disponible pour travailler.
     items:
       $ref: ./worker.v1.yaml
   underConstructionBuildings:
     type: array
-    description: Under construction buildings
+    description: Bâtiments en cours de construction.
     items:
       $ref: ./building.v1.yaml
   money:
     type: number
-    description: Money of the player
+    description: Les écus qui possèdent le joueur.
+    example: 10
   victoryPoints:
     type: number
-    description: Number of victory point the player has. Without the money part until the end of the game.
+    description: Les points de victoire du joueur sans les points de victoire liés aux écus.
+    example: 0
   actions:
     type: number
+    description: Le nombre d'actions dont dispose un joueur lors de son tour.
+    example: 3
 required:
   - id
   - finishedBuildings

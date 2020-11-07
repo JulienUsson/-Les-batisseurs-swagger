@@ -21,7 +21,7 @@ paths:
             application/json:
               schema:
                 $ref: ./models/game.v1.yaml
-      description: Create and initialise a game
+      description: Créer et initialiser une partie.
       requestBody:
         content:
           application/json:
@@ -52,30 +52,15 @@ paths:
                 type: array
                 items:
                   $ref: ./models/gameinfo.v1.yaml
-      description: Get all games
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: name
-          description: Name filter
-        - schema:
-            type: string
-          in: query
-          name: done
-          description: Done filter
-        - schema:
-            type: string
-          in: query
-          name: id
-          description: Id filter
+      description: Lister toutes les parties.
+      parameters: []
       tags:
         - Game
       operationId: findAllGames
   '/games/{gameId}':
     get:
       summary: Get a game
-      description: Get a game by its id.
+      description: Récupérer une partie via un identifiant.
       responses:
         '200':
           description: OK
@@ -111,16 +96,18 @@ paths:
               schema:
                 $ref: ./models/game.v1.yaml
         '400':
-          description: "Can't execute this action."
+          description: Can't execute this action.
         '401':
-          description: "It's not the player turn."
-      description: Play an action in the game
+          description: It's not the player turn.
+      description: Jouer une action.
       parameters:
         - schema:
             type: number
+            example: 1
           in: header
           name: player-id
           required: true
+          description: Identifiant du joueur qui veut effectuer l'action.
       requestBody:
         content:
           application/json:
@@ -170,7 +157,7 @@ paths:
                 app is ok:
                   value:
                     health: ok
-      description: Get application status
+      description: Récupérer le status de l'application.
       operationId: getHealth
   /cards/workers:
     get:
@@ -187,7 +174,7 @@ paths:
                 type: array
                 items:
                   $ref: ./models/worker.v1.yaml
-      description: Get all workers cards
+      description: Récupérer toutes les cartes ouvriers.
       operationId: findAllWorkers
   /cards/buildings:
     get:
@@ -203,7 +190,7 @@ paths:
                 type: array
                 items:
                   $ref: ./models/building.v1.yaml
-      description: Get all buildings cards
+      description: Récupérer toutes les cartes bâtiments.
       operationId: findAllBuildings
 components:
   schemas: {}

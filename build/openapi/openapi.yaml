@@ -13,33 +13,9 @@ servers:
 paths:
   /games:
     get:
-      description: Get all games
+      description: Lister toutes les parties.
       operationId: findAllGames
-      parameters:
-      - description: Name filter
-        explode: true
-        in: query
-        name: name
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Done filter
-        explode: true
-        in: query
-        name: done
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Id filter
-        explode: true
-        in: query
-        name: id
-        required: false
-        schema:
-          type: string
-        style: form
+      parameters: []
       responses:
         "200":
           content:
@@ -53,7 +29,7 @@ paths:
       tags:
       - Game
     post:
-      description: Create and initialise a game
+      description: Créer et initialiser une partie.
       operationId: createGame
       requestBody:
         content:
@@ -82,7 +58,7 @@ paths:
       - Game
   /games/{gameId}:
     get:
-      description: Get a game by its id.
+      description: Récupérer une partie via un identifiant.
       operationId: getGame
       parameters:
       - explode: false
@@ -106,7 +82,7 @@ paths:
       - Game
   /games/{gameId}/actions:
     post:
-      description: Play an action in the game
+      description: Jouer une action.
       operationId: playAction
       parameters:
       - explode: false
@@ -116,11 +92,13 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Identifiant du joueur qui veut effectuer l'action.
+        explode: false
         in: header
         name: player-id
         required: true
         schema:
+          example: 1
           type: number
         style: simple
       requestBody:
@@ -169,7 +147,7 @@ paths:
       - Game
   /health:
     get:
-      description: Get application status
+      description: Récupérer le status de l'application.
       operationId: getHealth
       responses:
         "200":
@@ -187,7 +165,7 @@ paths:
       - Health
   /cards/workers:
     get:
-      description: Get all workers cards
+      description: Récupérer toutes les cartes ouvriers.
       operationId: findAllWorkers
       responses:
         "200":
@@ -203,7 +181,7 @@ paths:
       - Cards
   /cards/buildings:
     get:
-      description: Get all buildings cards
+      description: Récupérer toutes les cartes bâtiments.
       operationId: findAllBuildings
       responses:
         "200":
@@ -222,21 +200,30 @@ components:
     gameinfo:
       description: Game
       example:
-        numberOfPlayers: 0.8008281904610115
-        createdDate: createdDate
-        name: name
-        id: id
+        numberOfPlayers: 4
+        createdDate: '1604745669 '
+        name: Partie du samedi soir
+        id: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
         done: true
       properties:
         id:
+          description: Identifiant unique.
+          example: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
           type: string
         name:
+          description: Nom de la partie.
+          example: Partie du samedi soir
           type: string
         numberOfPlayers:
+          description: Nombre de joueurs
+          example: 4
           type: number
         done:
+          description: Est-ce que la partie est terminée ?
           type: boolean
         createdDate:
+          description: Date de création de la partie
+          example: '1604745669 '
           type: string
       required:
       - createdDate
@@ -257,15 +244,18 @@ components:
     gameinput:
       properties:
         numberOfPlayers:
-          description: Number of players in the game
+          description: Nombre de joueurs.
+          example: 4
           maximum: 4
           minimum: 2
           type: number
         shuffle:
           default: true
-          description: Will the deck be shuffle
+          description: Mélanger le deck. Permet de simplifier les tests.
           type: boolean
         name:
+          description: Nom de la partie.
+          example: Partie du samedi soir
           type: string
       required:
       - name
@@ -281,385 +271,389 @@ components:
     game:
       description: ""
       example:
-        remainingWorkers: 5.025004791520295
+        remainingWorkers: 7.061401241503109
         nextWorker:
-          price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
+          price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
         currentPlayer: 1.2402484571383035
         players:
         - availableWorkers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
           finishedBuildings:
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          money: 6.683562403749608
-          victoryPoints: 8.762042012749001
-          id: 3.810793081423201
-          actions: 9.018348186070783
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          money: 10
+          victoryPoints: 0
+          id: 1
+          actions: 3
           underConstructionBuildings:
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
         - availableWorkers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
           finishedBuildings:
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          money: 6.683562403749608
-          victoryPoints: 8.762042012749001
-          id: 3.810793081423201
-          actions: 9.018348186070783
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          money: 10
+          victoryPoints: 0
+          id: 1
+          actions: 3
           underConstructionBuildings:
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
-          - reward: 2.027123023002322
-            stoneProduced: 6.84685269835264
-            woodProduced: 7.457744773683766
-            tile: 1.4894159098541704
-            victoryPoint: 4.145608029883936
-            wood: 1.2315135367772556
-            id: 3.616076749251911
-            knowledgeProduced: 1.1730742509559433
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
+          - reward: 12
+            stoneProduced: 1.4658129805029452
+            woodProduced: 5.962133916683182
+            tile: 2
+            victoryPoint: 3
+            wood: 1
+            id: 5
+            knowledgeProduced: 5.637376656633329
             workers:
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            - price: 5.962133916683182
-              tile: 9.301444243932576
-              wood: 2.3021358869347655
-              id: 1.4658129805029452
-              stone: 5.637376656633329
-              knowledge: 7.061401241503109
-            stone: 7.386281948385884
-            knowledge: 1.0246457001441578
-            tileProduced: 4.965218492984954
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            - price: 5
+              tile: 5
+              wood: 3
+              id: "10"
+              stone: 2
+              knowledge: 4
+            stone: 2
+            knowledge: 1
+            tileProduced: 2.3021358869347655
         done: true
-        remainingBuildings: 9.965781217890562
+        remainingBuildings: 9.301444243932576
         moneyAvailable: 6.027456183070403
+        createdDate: createdDate
         nextBuilding:
-          reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+          reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
         buildings:
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
         name: name
-        id: id
+        id: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
         workers:
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
-        createDate: createDate
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
       properties:
         id:
-          description: Id of the game
+          description: Identifiant unique.
+          example: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
           type: string
         currentPlayer:
-          description: Current player id
+          description: Identifiant du joueur actuel.
           maximum: 4
           minimum: 1
           type: number
         moneyAvailable:
-          description: Money available in the game
+          description: Le nombre d'écus disponible au centre de la table.
           type: number
         workers:
-          description: worker cards available
+          description: Les cartes ouvriers face visible sur le terrain.
           items:
             $ref: '#/components/schemas/worker'
           type: array
         buildings:
-          description: Building cards available
+          description: Les cartes bâtiments face visible sur le terrain.
           items:
             $ref: '#/components/schemas/building'
           type: array
         remainingWorkers:
-          description: Number of card in the workers deck
+          description: Nombre de cartes restantes dans la pioche ouvrier.
           type: number
         remainingBuildings:
-          description: Number of card in the buildings deck
+          description: Nombre de cartes restantes dans la pioche bâtiment.
           type: number
         nextWorker:
           $ref: '#/components/schemas/worker'
         nextBuilding:
           $ref: '#/components/schemas/building'
         done:
-          description: Is game done
+          description: Est-ce que la partie est terminée ?
           type: boolean
         name:
+          description: Nom de la partie.
           type: string
-        createDate:
+        createdDate:
+          description: Date de création de la partie.
           type: string
         players:
+          description: Les joueurs.
           items:
             $ref: '#/components/schemas/player'
           type: array
       required:
       - buildings
-      - createDate
+      - createdDate
       - currentPlayer
       - done
       - id
@@ -832,7 +826,7 @@ components:
     action:
       properties:
         type:
-          description: Type of the action
+          description: Type d'action
           enum:
           - TAKE_BUILDING
           - TAKE_WORKER
@@ -840,6 +834,7 @@ components:
           - SEND_WORKER
           - BUY_ACTION
           - END_TURN
+          example: TAKE_BUILDING
           type: string
         payload:
           $ref: '#/components/schemas/action_payload'
@@ -888,24 +883,38 @@ components:
             health: ok
     worker:
       example:
-        price: 5.962133916683182
-        tile: 9.301444243932576
-        wood: 2.3021358869347655
-        id: 1.4658129805029452
-        stone: 5.637376656633329
-        knowledge: 7.061401241503109
+        price: 5
+        tile: 5
+        wood: 3
+        id: "10"
+        stone: 2
+        knowledge: 4
       properties:
         id:
-          type: number
+          description: Identifiant unique.
+          example: "10"
+          type: string
         price:
+          description: |-
+            Nombre d’Écus que le joueur doit payer pour Envoyer
+            travailler cet Ouvrier.
+          example: 5
           type: number
         stone:
+          description: Nombre de Ressources «pierre» que produit cet Ouvrier.
+          example: 2
           type: number
         wood:
+          description: Nombre de Ressources «bois» que produit cet Ouvrier.
+          example: 3
           type: number
         knowledge:
+          description: Nombre de Ressources «savoir» que produit cet Ouvrier.
+          example: 4
           type: number
         tile:
+          description: Nombre de Ressources «tuile» que produit cet Ouvrier.
+          example: 5
           type: number
       required:
       - id
@@ -933,55 +942,86 @@ components:
             tile: "0"
     building:
       example:
-        reward: 2.027123023002322
-        stoneProduced: 6.84685269835264
-        woodProduced: 7.457744773683766
-        tile: 1.4894159098541704
-        victoryPoint: 4.145608029883936
-        wood: 1.2315135367772556
-        id: 3.616076749251911
-        knowledgeProduced: 1.1730742509559433
+        reward: 12
+        stoneProduced: 1.4658129805029452
+        woodProduced: 5.962133916683182
+        tile: 2
+        victoryPoint: 3
+        wood: 1
+        id: 5
+        knowledgeProduced: 5.637376656633329
         workers:
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
-        stone: 7.386281948385884
-        knowledge: 1.0246457001441578
-        tileProduced: 4.965218492984954
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
+        stone: 2
+        knowledge: 1
+        tileProduced: 2.3021358869347655
       properties:
         id:
+          description: Identifiant du bâtiment.
+          example: 5
           type: number
         reward:
+          description: |-
+            Nombre d’Écus que le joueur gagnera, une fois
+            le Bâtiment terminé.
+          example: 12
           type: number
         victoryPoint:
+          description: |-
+            Nombre de points de victoire que le joueur gagnera,
+            une fois le Bâtiment terminé.
+          example: 3
           type: number
         stone:
+          description: |-
+            Nombre de Ressources «pierre» nécessaires à la
+            construction du Bâtiment.
+          example: 2
           type: number
         wood:
+          description: |-
+            Nombre de Ressources «bois» nécessaires à la
+            construction du Bâtiment.
+          example: 1
           type: number
         knowledge:
+          description: |-
+            Nombre de Ressources «savoir» nécessaires à la
+            construction du Bâtiment.
+          example: 1
           type: number
         tile:
+          description: |-
+            Nombre de Ressources «tuile» nécessaires à la
+            construction du Bâtiment.
+          example: 2
           type: number
         stoneProduced:
+          description: Nombre de Ressources «pierre» produite par la machine.
           type: number
         woodProduced:
+          description: Nombre de Ressources «bois» produite par la machine.
           type: number
         knowledgeProduced:
+          description: Nombre de Ressources «savoir» produite par la machine.
           type: number
         tileProduced:
+          description: Nombre de Ressources «tuile» produite par la machine.
           type: number
         workers:
-          description: Workers working on the building
+          description: Ouvriers travaillant sur le bâtiment. Utile uniquement lors
+            d'une partie.
           items:
             $ref: '#/components/schemas/worker'
           type: array
@@ -1019,149 +1059,154 @@ components:
     player:
       example:
         availableWorkers:
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
-        - price: 5.962133916683182
-          tile: 9.301444243932576
-          wood: 2.3021358869347655
-          id: 1.4658129805029452
-          stone: 5.637376656633329
-          knowledge: 7.061401241503109
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
+        - price: 5
+          tile: 5
+          wood: 3
+          id: "10"
+          stone: 2
+          knowledge: 4
         finishedBuildings:
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
-        money: 6.683562403749608
-        victoryPoints: 8.762042012749001
-        id: 3.810793081423201
-        actions: 9.018348186070783
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
+        money: 10
+        victoryPoints: 0
+        id: 1
+        actions: 3
         underConstructionBuildings:
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
-        - reward: 2.027123023002322
-          stoneProduced: 6.84685269835264
-          woodProduced: 7.457744773683766
-          tile: 1.4894159098541704
-          victoryPoint: 4.145608029883936
-          wood: 1.2315135367772556
-          id: 3.616076749251911
-          knowledgeProduced: 1.1730742509559433
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
+        - reward: 12
+          stoneProduced: 1.4658129805029452
+          woodProduced: 5.962133916683182
+          tile: 2
+          victoryPoint: 3
+          wood: 1
+          id: 5
+          knowledgeProduced: 5.637376656633329
           workers:
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          - price: 5.962133916683182
-            tile: 9.301444243932576
-            wood: 2.3021358869347655
-            id: 1.4658129805029452
-            stone: 5.637376656633329
-            knowledge: 7.061401241503109
-          stone: 7.386281948385884
-          knowledge: 1.0246457001441578
-          tileProduced: 4.965218492984954
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          - price: 5
+            tile: 5
+            wood: 3
+            id: "10"
+            stone: 2
+            knowledge: 4
+          stone: 2
+          knowledge: 1
+          tileProduced: 2.3021358869347655
       properties:
         id:
-          description: Id of the player between 1 and 4.
+          description: Identifiant compris entre 1 et 4 selon le nombre de joueurs.
+          example: 1
           maximum: 4
           minimum: 1
           type: number
         finishedBuildings:
-          description: Buildings finished
+          description: Bâtiments terminés.
           items:
             $ref: '#/components/schemas/building'
           type: array
         availableWorkers:
-          description: Available workers
+          description: Ouvriers disponible pour travailler.
           items:
             $ref: '#/components/schemas/worker'
           type: array
         underConstructionBuildings:
-          description: Under construction buildings
+          description: Bâtiments en cours de construction.
           items:
             $ref: '#/components/schemas/building'
           type: array
         money:
-          description: Money of the player
+          description: Les écus qui possèdent le joueur.
+          example: 10
           type: number
         victoryPoints:
-          description: Number of victory point the player has. Without the money part
-            until the end of the game.
+          description: Les points de victoire du joueur sans les points de victoire
+            liés aux écus.
+          example: 0
           type: number
         actions:
+          description: Le nombre d'actions dont dispose un joueur lors de son tour.
+          example: 3
           type: number
       required:
       - actions
@@ -1190,14 +1235,14 @@ components:
             victoryPoints: 0
             actions: 3
     action_payload:
-      description: Parameters of the action
+      description: Paramètres nécessaires pour effectuer l'action.
       properties:
         buildingId:
-          description: Building id for TAKE_BUILDING or SEND_WORKER actions.
+          description: Identifiant du bâtiment pour les actions TAKE_BUILDING et SEND_WORKER.
           type: string
         workerId:
-          description: Worker id for TAKE_WORKER or SEND_WORKER actions
+          description: Identifiant de l'ouvrier pour les actions TAKE_WORKER et SEND_WORKER.
           type: string
         numberOfActions:
-          description: Numbers of action for the TAKE_MONEY action
+          description: Nombre d'actions échangées pour l'action TAKE_MONEY.
           type: number

@@ -161,44 +161,48 @@ x-examples:
 properties:
   id:
     type: string
-    description: Id of the game
+    description: Identifiant unique.
+    example: 2d56a4e8-119f-4c8a-bb18-4b9e018c9ee2
   currentPlayer:
     type: number
     maximum: 4
     minimum: 1
-    description: Current player id
+    description: Identifiant du joueur actuel.
   moneyAvailable:
     type: number
-    description: Money available in the game
+    description: Le nombre d'écus disponible au centre de la table.
   workers:
     type: array
-    description: worker cards available
+    description: Les cartes ouvriers face visible sur le terrain.
     items:
       $ref: ./worker.v1.yaml
   buildings:
     type: array
-    description: Building cards available
+    description: Les cartes bâtiments face visible sur le terrain.
     items:
       $ref: ./building.v1.yaml
   remainingWorkers:
     type: number
-    description: Number of card in the workers deck
+    description: Nombre de cartes restantes dans la pioche ouvrier.
   remainingBuildings:
     type: number
-    description: Number of card in the buildings deck
+    description: Nombre de cartes restantes dans la pioche bâtiment.
   nextWorker:
     $ref: ./worker.v1.yaml
   nextBuilding:
     $ref: ./building.v1.yaml
   done:
     type: boolean
-    description: Is game done
+    description: Est-ce que la partie est terminée ?
   name:
     type: string
-  createDate:
+    description: Nom de la partie.
+  createdDate:
     type: string
+    description: Date de création de la partie.
   players:
     type: array
+    description: Les joueurs.
     items:
       $ref: ./player.v1.yaml
 required:
@@ -213,5 +217,5 @@ required:
   - nextBuilding
   - done
   - name
-  - createDate
+  - createdDate
   - players

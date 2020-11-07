@@ -24,29 +24,59 @@ x-examples:
 properties:
   id:
     type: number
+    description: Identifiant du bâtiment.
+    example: 5
   reward:
     type: number
+    description: |-
+      Nombre d’Écus que le joueur gagnera, une fois
+      le Bâtiment terminé.
+    example: 12
   victoryPoint:
     type: number
+    description: |-
+      Nombre de points de victoire que le joueur gagnera,
+      une fois le Bâtiment terminé.
+    example: 3
   stone:
     type: number
+    description: |-
+      Nombre de Ressources «pierre» nécessaires à la
+      construction du Bâtiment.
+    example: 2
   wood:
     type: number
+    description: |-
+      Nombre de Ressources «bois» nécessaires à la
+      construction du Bâtiment.
+    example: 1
   knowledge:
     type: number
+    description: |-
+      Nombre de Ressources «savoir» nécessaires à la
+      construction du Bâtiment.
+    example: 1
   tile:
     type: number
+    description: |-
+      Nombre de Ressources «tuile» nécessaires à la
+      construction du Bâtiment.
+    example: 2
   stoneProduced:
     type: number
+    description: Nombre de Ressources «pierre» produite par la machine.
   woodProduced:
     type: number
+    description: Nombre de Ressources «bois» produite par la machine.
   knowledgeProduced:
     type: number
+    description: Nombre de Ressources «savoir» produite par la machine.
   tileProduced:
     type: number
+    description: Nombre de Ressources «tuile» produite par la machine.
   workers:
     type: array
-    description: Workers working on the building
+    description: Ouvriers travaillant sur le bâtiment. Utile uniquement lors d'une partie.
     items:
       $ref: ./worker.v1.yaml
 required:

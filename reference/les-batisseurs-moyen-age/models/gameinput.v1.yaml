@@ -11,13 +11,16 @@ properties:
     type: number
     minimum: 2
     maximum: 4
-    description: Number of players in the game
+    description: Nombre de joueurs.
+    example: 4
   shuffle:
     type: boolean
     default: true
-    description: Will the deck be shuffle
+    description: Mélanger le deck. Permet de simplifier les tests.
   name:
     type: string
+    description: Nom de la partie.
+    example: Partie du samedi soir
 required:
   - numberOfPlayers
   - name
