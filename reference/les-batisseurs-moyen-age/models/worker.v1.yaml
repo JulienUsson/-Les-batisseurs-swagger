@@ -17,7 +17,7 @@ x-examples:
       tile: '0'
 properties:
   id:
-    type: string
+    type: number
     description: Identifiant unique.
     example: '10'
   price:

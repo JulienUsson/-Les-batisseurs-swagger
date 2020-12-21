@@ -276,7 +276,7 @@ components:
           price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         currentPlayer: 1.2402484571383035
@@ -285,13 +285,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           finishedBuildings:
@@ -307,13 +307,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -331,13 +331,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -360,13 +360,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -384,13 +384,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -400,13 +400,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           finishedBuildings:
@@ -422,13 +422,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -446,13 +446,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -475,13 +475,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -499,13 +499,13 @@ components:
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             - price: 5
               tile: 5
               wood: 3
-              id: "10"
+              id: 10
               stone: 2
               knowledge: 4
             stone: 2
@@ -528,13 +528,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -553,13 +553,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -577,13 +577,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -595,13 +595,13 @@ components:
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
       properties:
@@ -886,14 +886,14 @@ components:
         price: 5
         tile: 5
         wood: 3
-        id: "10"
+        id: 10
         stone: 2
         knowledge: 4
       properties:
         id:
           description: Identifiant unique.
-          example: "10"
-          type: string
+          example: 10
+          type: number
         price:
           description: |-
             Nombre d’Écus que le joueur doit payer pour Envoyer
@@ -954,13 +954,13 @@ components:
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         stone: 2
@@ -1062,13 +1062,13 @@ components:
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         - price: 5
           tile: 5
           wood: 3
-          id: "10"
+          id: 10
           stone: 2
           knowledge: 4
         finishedBuildings:
@@ -1084,13 +1084,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -1108,13 +1108,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -1137,13 +1137,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
@@ -1161,13 +1161,13 @@ components:
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           - price: 5
             tile: 5
             wood: 3
-            id: "10"
+            id: 10
             stone: 2
             knowledge: 4
           stone: 2
